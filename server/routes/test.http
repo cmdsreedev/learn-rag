@@ -1,0 +1,17 @@
+POST http://localhost:3000/ingest  HTTP/1.1
+content-type: application/json
+
+{ "text": ""}
+
+
+
+###
+GET http://localhost:3000/healthcheck
+
+
+###
+POST http://localhost:3000/query HTTP/1.1
+Content-Type: application/json
+
+{ "question": "Give me a gist of important points"}
+

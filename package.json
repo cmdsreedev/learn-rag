@@ -1,0 +1,19 @@
+{
+  "name": "learn-rag",
+  "module": "server/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun server/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "fastify": "^5.8.5",
+    "node-fetch": "^3.3.2"
+  }
+}
