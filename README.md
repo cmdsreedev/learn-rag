@@ -11,6 +11,8 @@ POST /ingest  →  chunk text  →  embed chunks (nomic-embed-text)  →  store 
 POST /query   →  embed question  →  cosine similarity search  →  generate answer (llama3)
 ```
 
+![RAG process diagram](./rag_process.svg)
+
 ## Prerequisites
 
 - [Bun](https://bun.com) v1.3+
@@ -25,7 +27,8 @@ POST /query   →  embed question  →  cosine similarity search  →  generate 
 
 ```bash
 bun install
-bun start        # starts the server on http://localhost:3000
+bun start                    # runs turbo start
+bun --filter rag start       # starts the API package directly
 ```
 
 ## API
@@ -58,18 +61,20 @@ Returns `{ "status": "ok" }`.
 ## Project structure
 
 ```
-server/
-  index.ts              # Fastify app setup & graceful shutdown
-  routes/
-    ingest.ts           # POST /ingest route
-    query.ts            # POST /query route
+packages/
+  rag/
+    server/
+      index.ts          # Fastify app setup & graceful shutdown
+      routes/
+        ingest.ts       # POST /ingest route
+        query.ts        # POST /query route
+      services/
+        chunk.ts        # Splits text into word-based chunks (default 500 words)
+        embed.ts        # Calls Ollama embeddings API (nomic-embed-text)
+        retrieve.ts     # In-memory vector store with cosine similarity search
+        generate.ts     # Calls Ollama generate API (llama3)
+        index.ts        # Re-exports all services
     test.http           # HTTP test file (REST Client)
-  services/
-    chunk.ts            # Splits text into word-based chunks (default 500 words)
-    embed.ts            # Calls Ollama embeddings API (nomic-embed-text)
-    retrieve.ts         # In-memory vector store with cosine similarity search
-    generate.ts         # Calls Ollama generate API (llama3)
-    index.ts            # Re-exports all services
 ```
 
 > **Note:** Vectors are stored in memory only — they are lost on server restart.

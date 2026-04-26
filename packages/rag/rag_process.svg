@@ -1,0 +1,117 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#333"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.18"/>
+    </filter>
+    <style>
+      .title { font: 700 34px Arial, sans-serif; fill: #111; }
+      .subtitle { font: 16px Arial, sans-serif; fill: #555; }
+      .section { font: 700 22px Arial, sans-serif; fill: #222; }
+      .boxTitle { font: 700 17px Arial, sans-serif; fill: #111; }
+      .boxText { font: 14px Arial, sans-serif; fill: #444; }
+      .tiny { font: 12px Arial, sans-serif; fill: #666; }
+      .box { fill: #fff; stroke: #d8d8d8; stroke-width: 2; rx: 18; filter: url(#shadow); }
+      .blue { fill: #eef5ff; stroke: #b8d4ff; }
+      .green { fill: #effaf2; stroke: #b9e2c3; }
+      .orange { fill: #fff5e8; stroke: #ffd3a3; }
+      .purple { fill: #f5efff; stroke: #d6c0ff; }
+      .gray { fill: #f6f6f6; stroke: #d7d7d7; }
+      .arrow { stroke: #333; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .dash { stroke-dasharray: 7 6; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="#fbfbfd"/>
+
+  <text x="60" y="60" class="title">RAG process with embedding model + LLM</text>
+  <text x="60" y="88" class="subtitle">nomic-embed-text finds meaning. llama3 writes the final answer.</text>
+
+  <!-- Ingest side -->
+  <text x="80" y="145" class="section">1. Ingest knowledge</text>
+
+  <rect x="70" y="170" width="210" height="100" class="box blue"/>
+  <text x="95" y="204" class="boxTitle">Your documents</text>
+  <text x="95" y="232" class="boxText">PDFs, notes, pages, code</text>
+
+  <path d="M280 220 H340" class="arrow"/>
+
+  <rect x="340" y="170" width="210" height="100" class="box blue"/>
+  <text x="365" y="204" class="boxTitle">Chunk text</text>
+  <text x="365" y="232" class="boxText">Split into small pieces</text>
+
+  <path d="M550 220 H610" class="arrow"/>
+
+  <rect x="610" y="170" width="250" height="100" class="box green"/>
+  <text x="635" y="204" class="boxTitle">nomic-embed-text</text>
+  <text x="635" y="232" class="boxText">chunk → vector numbers</text>
+
+  <path d="M860 220 H920" class="arrow"/>
+
+  <rect x="920" y="170" width="210" height="100" class="box orange"/>
+  <text x="945" y="204" class="boxTitle">Vector DB</text>
+  <text x="945" y="232" class="boxText">stores text + vectors</text>
+
+  <!-- Query side -->
+  <text x="80" y="355" class="section">2. Ask a question</text>
+
+  <rect x="70" y="380" width="210" height="100" class="box purple"/>
+  <text x="95" y="414" class="boxTitle">User question</text>
+  <text x="95" y="442" class="boxText">“Explain React state”</text>
+
+  <path d="M280 430 H340" class="arrow"/>
+
+  <rect x="340" y="380" width="250" height="100" class="box green"/>
+  <text x="365" y="414" class="boxTitle">nomic-embed-text</text>
+  <text x="365" y="442" class="boxText">question → vector</text>
+
+  <path d="M590 430 H665" class="arrow"/>
+
+  <rect x="665" y="370" width="240" height="120" class="box orange"/>
+  <text x="690" y="407" class="boxTitle">Similarity search</text>
+  <text x="690" y="435" class="boxText">compare question vector</text>
+  <text x="690" y="457" class="boxText">against stored vectors</text>
+
+  <path d="M905 430 H980" class="arrow"/>
+
+  <rect x="980" y="380" width="150" height="100" class="box orange"/>
+  <text x="1005" y="414" class="boxTitle">Top chunks</text>
+  <text x="1005" y="442" class="boxText">best matching</text>
+  <text x="1005" y="462" class="boxText">context</text>
+
+  <!-- LLM generation -->
+  <text x="80" y="575" class="section">3. Generate answer</text>
+
+  <rect x="190" y="600" width="250" height="100" class="box gray"/>
+  <text x="215" y="634" class="boxTitle">Prompt</text>
+  <text x="215" y="662" class="boxText">question + top chunks</text>
+
+  <path d="M440 650 H520" class="arrow"/>
+
+  <rect x="520" y="590" width="260" height="120" class="box purple"/>
+  <text x="545" y="627" class="boxTitle">llama3</text>
+  <text x="545" y="655" class="boxText">uses context</text>
+  <text x="545" y="677" class="boxText">predicts next tokens</text>
+
+  <path d="M780 650 H860" class="arrow"/>
+
+  <rect x="860" y="600" width="230" height="100" class="box blue"/>
+  <text x="885" y="634" class="boxTitle">Answer</text>
+  <text x="885" y="662" class="boxText">grounded in your docs</text>
+
+  <!-- DB connector -->
+  <path d="M1030 270 V335 C1030 355 1020 365 1000 365 H790 C770 365 760 370 760 390" class="arrow dash"/>
+  <text x="805" y="340" class="tiny">stored vectors are searched later</text>
+
+  <!-- Legend -->
+  <rect x="70" y="710" width="18" height="18" fill="#effaf2" stroke="#b9e2c3"/>
+  <text x="98" y="724" class="tiny">Embedding model</text>
+
+  <rect x="230" y="710" width="18" height="18" fill="#f5efff" stroke="#d6c0ff"/>
+  <text x="258" y="724" class="tiny">LLM / generation</text>
+
+  <rect x="390" y="710" width="18" height="18" fill="#fff5e8" stroke="#ffd3a3"/>
+  <text x="418" y="724" class="tiny">Retrieval / vector DB</text>
+</svg>

@@ -1,0 +1,19 @@
+{
+  "name": "rag",
+  "private": true,
+  "type": "module",
+  "module": "server/index.ts",
+  "scripts": {
+    "start": "bun server/index.ts",
+    "dev": "bun --watch server/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fastify": "^5.8.5",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5"
+  }
+}
