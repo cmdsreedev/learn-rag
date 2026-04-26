@@ -1,4 +1,4 @@
-type Matrix = number[][]
+import type { Matrix } from './common';
 
 export class Embedding {
     vocabSize: number;

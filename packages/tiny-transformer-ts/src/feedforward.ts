@@ -1,4 +1,5 @@
-type Matrix = number[][];
+import type { Matrix } from './common';
+import { matMul, relu } from './utils';
 
 export class FeedForward {
   W1: Matrix;
@@ -9,18 +10,8 @@ export class FeedForward {
     this.W2 = W2;
   }
 
-  matMul(a: Matrix, b: Matrix): Matrix {
-    return a.map((row) =>
-      b[0].map((_, col) => row.reduce((sum, val, i) => sum + val * b[i][col], 0))
-    );
-  }
-
-  relu(m: Matrix): Matrix {
-    return m.map(row => row.map(x => Math.max(0, x)));
-  }
-
   forward(input: Matrix): Matrix {
-    const hidden = this.relu(this.matMul(input, this.W1))
-    return this.matMul(hidden, this.W2)
+    const hidden = relu(matMul(input, this.W1));
+    return matMul(hidden, this.W2);
   }
 }

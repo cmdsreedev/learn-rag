@@ -1,4 +1,4 @@
-type Vocab = Record<string, number>;
+import type { Vocab } from './common';
 
 export class Tokenizer {
   vocab: Vocab = {};
