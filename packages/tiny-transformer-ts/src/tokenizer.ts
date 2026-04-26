@@ -30,17 +30,3 @@ export class Tokenizer {
     return ids.map((id) => this.reverseVocab[id]).join(' ');
   }
 }
-
-function test() {
-  const text = 'React uses hooks and React state';
-
-  const tokenizer = new Tokenizer();
-  tokenizer.fit(text);
-
-  const encoded = tokenizer.encode('React uses state');
-
-  console.log('Vocab:', tokenizer.vocab);
-  console.log('Encoded:', encoded);
-  console.log('Decoded:', tokenizer.decode(encoded));
-}
-test();
